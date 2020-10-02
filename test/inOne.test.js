@@ -1,7 +1,7 @@
 const Travelpage = require('../pages/phpTravels.page')
 
 describe('Practical task', function() {
-    let creds
+    let creds;
 
     it('Should save credentials for the "Homepage Front-End"', () => { //(mocha|jasmine) i.e. before and beforeEach
         browser.maximizeWindow();
@@ -24,7 +24,19 @@ describe('Practical task', function() {
         Travelpage.clickLoginButtonFromLoginPage()
 
         //check login is completed
-        Travelpage.beSureTHatYouLogined()
-
+        Travelpage.beSureThatYouLogined()
+    })
+    it('Search and book Dubai Bus Tour', () => {
+        Travelpage.clickHomePageButton()
+        Travelpage.clickTourNavButton()
+        Travelpage.clickDestinationDropdown()
+        Travelpage.clickDestinationDropdownBigBus()
+        Travelpage.clickTourTypeButton()
+        Travelpage.clickTourTypeDropdownFerry()
+        Travelpage.clearDateField()
+        Travelpage.enterTourDate(Travelpage.tourDate)
+        Travelpage.AdultsValueUp()
+        Travelpage.clickOnTheSearchButton()
+        browser.pause(3000)
     })
 })

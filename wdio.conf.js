@@ -1,5 +1,3 @@
-// const url = require('./urls')
-
 exports.config = {
     //
     // ====================
