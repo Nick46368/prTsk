@@ -3,6 +3,7 @@ const loginData = require('../data/loginData.js');
 
 describe('Practical task', function() {
     let creds;
+    let urlFromInvBtn;
 
     it('Should save credentials for the "Homepage Front-End"', () => { //(mocha|jasmine) i.e. before and beforeEach hook
         browser.maximizeWindow();
@@ -38,6 +39,7 @@ describe('Practical task', function() {
         Travelpage.enterTourDate(loginData.tourDate);
         Travelpage.AdultsValueUp();
         Travelpage.clickOnTheSearchButton();
+        //book now
         Travelpage.clearDateFieldFBO();
         Travelpage.enterTourDateFBO(loginData.tourDate);
         Travelpage.clickChangeDateButton();
@@ -45,16 +47,21 @@ describe('Practical task', function() {
         Travelpage.clickBookNowButton();
     })
     it('Complete booking with entering appropriate info', () => {
-        Travelpage.enterDataIntoTheNotesField(Travelpage.notesText);
+        Travelpage.enterDataIntoTheNotesField(loginData["Notes / Additional Request"]);
         Travelpage.clickConfirmButton();
         Travelpage.unpaidBanner.waitForEnabled();
     })
     it('Navigate to the Account and open Invoice for the completed booking', () => {
         Travelpage.clickDropdownLoginButton();
         Travelpage.clickAccountButton();
+        urlFromInvBtn = Travelpage.getUrlFromInvoiceButton();
         Travelpage.clickInvoiceButton();
-        Travelpage.payNowButton.waitForEnabled();
+    })
+    it('Check booking details by comparing with test data', () =>{
+        browser.newWindow(urlFromInvBtn);
+        Travelpage.takeDataForAssertion();
+    })
+    it.skip('Click on Pay Now and enter credentials of Credit Card', () =>{
         Travelpage.clickPayNowButton();
-        browser.pause(3000)
-    });
+    })
 })
