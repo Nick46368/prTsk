@@ -1,9 +1,11 @@
 const Travelpage = require('../pages/phpTravels.page');
 const loginData = require('../data/loginData.js');
+const { expect, assert } = require('chai');
 
 describe('Practical task', function() {
     let creds;
     let urlFromInvBtn;
+    let dataForAss;
 
     it('Should save credentials for the "Homepage Front-End"', () => { //(mocha|jasmine) i.e. before and beforeEach hook
         browser.maximizeWindow();
@@ -58,10 +60,15 @@ describe('Practical task', function() {
         Travelpage.clickInvoiceButton();
     })
     it('Check booking details by comparing with test data', () =>{
-        browser.newWindow(urlFromInvBtn);
-        Travelpage.takeDataForAssertion();
+        browser.switchWindow('https://www.phptravels.net/account');
+        browser.switchWindow('Invoice');
+        dataForAss = Travelpage.takeDataForAssertion();
+        assert.deepStrictEqual(dataForAss["First Name"], loginData["First Name"]);
+        assert.deepStrictEqual(dataForAss.Address, loginData.Address);
+        assert.deepStrictEqual(dataForAss["Mobile Number"], loginData["Mobile Number"]);
+        assert.deepStrictEqual(dataForAss["Notes / Additional Requests"], loginData["Notes / Additional Request"]);
     })
     it.skip('Click on Pay Now and enter credentials of Credit Card', () =>{
-        Travelpage.clickPayNowButton();
+        Travelpage.clickPayNowButton(); 
     })
 })

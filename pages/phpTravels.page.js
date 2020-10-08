@@ -42,8 +42,8 @@ class Travelpage {
     //data for assertion
     get dataForAssertion() { return $('.col-12.col-lg-8 div[class^=con]') };
     get firstNameField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(3) span.go-left.float-right') };
-    get addressField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(4)') };
-    get mobileNumberField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(5)') };
+    get addressField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(4) span.go-left.float-right') };
+    get mobileNumberField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(5) span.go-left.float-right') };
     get notesAdditionalRequestField() { return $('.col-12.col-lg-8 textarea') };
 
     getCreds() {
@@ -181,6 +181,7 @@ class Travelpage {
         this.accountButton.click();
     };
 
+    // Needed when opening additional page in the browser after clicking on Invoice button
     getUrlFromInvoiceButton() {
         this.urlFromInvoiceButton.waitForDisplayed();
         const url = this.urlFromInvoiceButton.getAttribute('href');
@@ -193,14 +194,31 @@ class Travelpage {
         this.invoiceButton.click();
     };
     
-    takeDataForAssertion() {
-        // const currentUrl = browser.getUrl();
-        // console.log(currentUrl);
-        this.dataForAssertion.waitForExist();
-        const dataFromPayPage = this.dataForAssertion.getAttribute('textContent');
-        let ass0 = dataFromPayPage.split(/[ | \n]/).join(' ');
-       // let ass1 = ass0.map(function (str) { replaced = str.replace(/\s+/g,''); return replaced;});
-        console.log(ass0);
+    getFirstNameField() {
+        this.firstNameField.waitForDisplayed();
+        return this.firstNameField.getText();
+    }
+    getAddressField() {
+        this.addressField.waitForDisplayed();
+        return this.addressField.getText();
+    }
+    getMobileNumberField() {
+        this.mobileNumberField.waitForDisplayed();
+        return this.mobileNumberField.getText();
+    }
+    getNotesAdditionalRequestField() {
+        this.notesAdditionalRequestField.waitForDisplayed();
+        return this.notesAdditionalRequestField.getText();
+
+    }
+     
+    takeDataForAssertion() {   
+        return {
+            'First Name': this.getFirstNameField(),
+            'Address': this.getAddressField(),
+            'Mobile Number': this.getMobileNumberField(),
+            'Notes / Additional Requests': this.getNotesAdditionalRequestField()
+        }
     };
 
     clickPayNowButton() {
