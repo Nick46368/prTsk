@@ -68,7 +68,16 @@ describe('Practical task', function() {
         assert.deepStrictEqual(dataForAss["Mobile Number"], loginData["Mobile Number"]);
         assert.deepStrictEqual(dataForAss["Notes / Additional Requests"], loginData["Notes / Additional Request"]);
     })
-    it.skip('Click on Pay Now and enter credentials of Credit Card', () =>{
+    it('Click on "Pay Now" with Credit Card credentials', () =>{
         Travelpage.clickPayNowButton(); 
+        Travelpage.clickPayByDropdown();
+        Travelpage.clickPayByCreditCard();
+        Travelpage.enterCCFirstNameField(loginData["First Name"]);
+        Travelpage.enterCCLastNameField(loginData["Last Name"]);
+        Travelpage.enterCCardNumber(loginData["Card Number"]);
+        Travelpage.enterCCExpirationDate();
+        Travelpage.enterCCExpirationDateYear();
+        Travelpage.enterCVV(loginData["Card CVV"]);
+        Travelpage.getInvalidBanner();
     })
 })

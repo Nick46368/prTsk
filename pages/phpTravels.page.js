@@ -45,6 +45,17 @@ class Travelpage {
     get addressField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(4) span.go-left.float-right') };
     get mobileNumberField() { return $('.col-12.col-lg-8 .confirmation-list li:nth-child(5) span.go-left.float-right') };
     get notesAdditionalRequestField() { return $('.col-12.col-lg-8 textarea') };
+    //credentials from Credit Card
+    get CCFirstNameField() { return $('.form-group #card-holder-firstname') };
+    get CCLastNameField() { return $('.form-group #card-holder-lastname') };
+    get CCardNumber() { return $('input#card-number') };
+    get CCExpirationDate() { return $('select#expiry-month') };
+    get CCExpirationDateIsNovember() { return $('select#expiry-month option[value="11"]') };
+    get CCExpirationDateYear() { return $('select#expiry-year') };
+    get CCExpirationDateYear2030() { return $('select#expiry-year option[value="2030"]') };
+    get CVV() { return $('#cvv') };
+    get CCpayNowButton() { return $('#pay div.col-sm-12.creditcardform button') };
+    get invalidBanner() { return $('//body/div[2]/div[1]/div[1]/div/div/div[1]') };
 
     getCreds() {
         this.credentialsFromHomePage.waitForDisplayed();
@@ -222,18 +233,56 @@ class Travelpage {
     };
 
     clickPayNowButton() {
-        this.payNowButton.waitForEnabled();
-        this.payNowButton.keys("Enter");
+        this.payNowButton.waitForDisplayed({timeout: 3000});
+        this.payNowButton.click();
     };
 
     clickPayByDropdown() {
-        this.payByDropdown.waitForDisplayed();
+        this.payByDropdown.waitForClickable({timeout: 5000});
         this.payByDropdown.click();
     };
 
-    clickpayByCreditCard() {
-        this.payByCreditCard.waitForDisplayed();
+    clickPayByCreditCard() {
+        this.payByCreditCard.waitForClickable({timeout: 5000});
         this.payByCreditCard.click();
+    };
+
+    enterCCFirstNameField(text) {
+        this.CCFirstNameField.waitForDisplayed();
+        this.CCFirstNameField.setValue(text);
+    };
+
+    enterCCLastNameField(text) {
+        this.CCLastNameField.waitForDisplayed();
+        this.CCLastNameField.setValue(text);
+    };
+
+    enterCCardNumber(text) {
+        this.CCardNumber.waitForDisplayed();
+        this.CCardNumber.setValue(text);
+    };
+
+    enterCCExpirationDate() {
+        this.CCExpirationDate.waitForDisplayed();
+        this.CCExpirationDate.click();
+        this.CCExpirationDateIsNovember.waitForDisplayed();
+        this.CCExpirationDateIsNovember.click();
+    };
+
+    enterCCExpirationDateYear() {
+        this.CCExpirationDateYear.waitForDisplayed();
+        this.CCExpirationDateYear.click();
+        this.CCExpirationDateYear2030.waitForDisplayed();
+        this.CCExpirationDateYear2030.click();
+    };
+
+    enterCVV(text) {
+        this.CVV.waitForDisplayed();
+        this.CVV.setValue(text);
+    };
+
+    getInvalidBanner() {
+        this.invalidBanner.waitForDisplayed();
     }
 
 }
