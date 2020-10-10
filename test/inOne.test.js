@@ -59,7 +59,7 @@ describe('Practical task', function() {
         urlFromInvBtn = Travelpage.getUrlFromInvoiceButton();
         Travelpage.clickInvoiceButton();
     })
-    it('Check booking details by comparing with test data', () =>{
+    it('Check booking details by comparing with test data', () => {
         browser.switchWindow('https://www.phptravels.net/account');
         browser.switchWindow('Invoice');
         dataForAss = Travelpage.takeDataForAssertion();
@@ -68,7 +68,7 @@ describe('Practical task', function() {
         assert.deepStrictEqual(dataForAss["Mobile Number"], loginData["Mobile Number"]);
         assert.deepStrictEqual(dataForAss["Notes / Additional Requests"], loginData["Notes / Additional Request"]);
     })
-    it('Click on "Pay Now" with Credit Card credentials', () =>{
+    it('Click on "Pay Now" with Credit Card credentials', () => {
         Travelpage.clickPayNowButton(); 
         Travelpage.clickPayByDropdown();
         Travelpage.clickPayByCreditCard();
