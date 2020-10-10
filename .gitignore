@@ -1,1 +1,9 @@
 /node_modules/*
+/.vscode/*
+.gitignore
+debug.log
+package-lock.json
+package.json
+wdio.conf.js
+
+
